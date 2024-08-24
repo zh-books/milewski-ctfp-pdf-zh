@@ -18,18 +18,52 @@
     ``bartosz milewski category theory'' on YouTube.)}
 \end{quote}
 
-\begin{lstlisting}[style=haskellStyle]
+{Haskell 代码示例11111}
+\begin{lstlisting}[language=Haskell]
 f :: A -> B
+
+toExp :: (a -> b) -> Exp a b
+toExp f = Lan (f . fst) (I ())
+
+fromExp :: Exp a b -> (a -> b)
+fromExp (Lan f (I x)) = \a -> f (a, x)
+
+instance Functor (FreeF f) where
+    fmap g (FMap h fi) = FMap (g . h) fi
 \end{lstlisting}
 
 {OCaml 代码示例11111}
-\begin{lstlisting}[style=ocamlStyle]
+\begin{lstlisting}[language=Caml]
 module type Polymorphic_Function_F = sig
   type a
   type b
 
   val f : a -> b
 end
+module FreeFunctor (F : sig
+  type 'a f
+end) : Functor = struct
+  module type F = FreeF with type 'a f = 'a F.f
+
+  type 'a t = (module F with type a = 'a)
+
+  let fmap
+      (type a' b')
+      (f : a' -> b')
+      (module FF : F with type a = a')
+    =
+    (module struct
+      type 'a f = 'a F.f
+      type a = b'
+      type i = FF.i
+
+      let h i = f (FF.h i)
+      let fi = FF.fi
+    end : F
+      with type a = b')
+  ;;
+end
+
 \end{lstlisting}
 
 

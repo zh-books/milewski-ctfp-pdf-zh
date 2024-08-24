@@ -19,19 +19,7 @@ means that it's part of a round trip that lands you in the same spot, no
 matter on which side you start. In the case of pairs, this isomorphism
 is called \code{swap}:
 
-\begin{lstlisting}[style=haskellStyle]
-f :: A -> B
-\end{lstlisting}
 
-\section{OCaml 代码示例}
-\begin{lstlisting}[style=ocamlStyle]
-module type Polymorphic_Function_F = sig
-  type a
-  type b
-
-  val f : a -> b
-end
-\end{lstlisting}
 
 \src{snippet01}
 \code{swap} happens to be its own inverse.
