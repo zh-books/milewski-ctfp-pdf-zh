@@ -17,6 +17,29 @@
 % Uncomment for diagnostics!
 % \usepackage[cam,width=6in,height=9in]{crop}
 
+\usepackage{listings}
+\usepackage{xcolor}
+\lstdefinestyle{haskellStyle}{
+  language=Haskell,
+  basicstyle=\ttfamily,
+  keywordstyle=\color{blue},
+  commentstyle=\color{green},
+  stringstyle=\color{red},
+  morecomment=[l][\color{magenta}]{--},
+  breaklines=true
+}
+
+\lstdefinestyle{ocamlStyle}{
+  language=OCaml,
+  basicstyle=\ttfamily,
+  keywordstyle=\color{blue},
+  commentstyle=\color{green},
+  stringstyle=\color{red},
+  breaklines=true
+}
+
+\usepackage{minted}
+
 % Font settings
 %--------------------------------------------------------------%  Note:
 \usepackage[no-math]{fontspec}                                 %  This exact order
@@ -180,34 +203,34 @@
   \def\minted@opt@quote#1{\detokenize\expandafter{\expandafter'\expanded{#1}'}}
 \fi
 \makeatother
-
-\NewDocumentCommand\src{mO{}}{
-  \srcsnippet{\currfileabsdir/code/haskell/#1.hs}{blue}{haskell}{#2}
-  \ifdefined\OPTCustomLanguage{%
-    \unskip
-    \srcsnippet{\currfileabsdir/code/\OPTCustomLanguage/#1.\OPTCustomLanguageExt}{\OPTCustomLanguageColor}{\OPTCustomLanguage}{#2}
-  }
-  \fi
-  \NoIndentAfterThis
-}
-\NewDocumentCommand\srcsnippet{mmmm}{
-  \newif\ifbreak
-  \def\snippet{#1}
-  \mdfsetup{%
-    linecolor=#2!20,%
-    linewidth=2pt,
-    topline=false,
-    bottomline=false,
-    rightline=false,
-  }
-  \def\x{#4}
-  \ifthenelse{\equal{\x}{b}}{\breaktrue}{\breakfalse}
-  \begin{mdframed}
-    \ifbreak \inputminted[autogobble,breaklines]{#3}{\snippet}
-    \else \inputminted[autogobble]{#3}{\snippet}
-    \fi
-  \end{mdframed}
-}
+%
+%\NewDocumentCommand\src{mO{}}{
+%  \srcsnippet{\currfileabsdir/code/haskell/#1.hs}{blue}{haskell}{#2}
+%  \ifdefined\OPTCustomLanguage{%
+%    \unskip
+%    \srcsnippet{\currfileabsdir/code/\OPTCustomLanguage/#1.\OPTCustomLanguageExt}{\OPTCustomLanguageColor}{\OPTCustomLanguage}{#2}
+%  }
+%  \fi
+%  \NoIndentAfterThis
+%}
+%\NewDocumentCommand\srcsnippet{mmmm}{
+%  \newif\ifbreak
+%  \def\snippet{#1}
+%  \mdfsetup{%
+%    linecolor=#2!20,%
+%    linewidth=2pt,
+%    topline=false,
+%    bottomline=false,
+%    rightline=false,
+%  }
+%  \def\x{#4}
+%  \ifthenelse{\equal{\x}{b}}{\breaktrue}{\breakfalse}
+%  \begin{mdframed}
+%    \ifbreak \inputminted[autogobble,breaklines]{#3}{\snippet}
+%    \else \inputminted[autogobble]{#3}{\snippet}
+%    \fi
+%  \end{mdframed}
+%}
 
 \newcommand{\acronym}[1]{\textsc{\MakeLowercase{#1}}}
 \newcommand{\newterm}[1]{\index{#1}\emph{#1}}

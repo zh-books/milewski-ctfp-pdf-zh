@@ -68,6 +68,20 @@ Library that takes two functions and returns their composition, but
 there isn't one. So let's try some Haskell for a change. Here's the
 declaration of a function from A to B:
 
+\begin{lstlisting}[style=haskellStyle]
+f :: A -> B
+\end{lstlisting}
+
+\section{OCaml 代码示例}
+\begin{lstlisting}[style=ocamlStyle]
+module type Polymorphic_Function_F = sig
+  type a
+  type b
+
+  val f : a -> b
+end
+\end{lstlisting}
+
 \src{snippet01}
 Similarly:
 
