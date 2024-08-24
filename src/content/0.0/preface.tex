@@ -18,6 +18,15 @@
     ``bartosz milewski category theory'' on YouTube.)}
 \end{quote}
 
+{Haskell 代码示例0000}
+\begin{lstlisting}[language=Haskell]
+f :: A -> B
+toExp :: (a -> b) -> Exp a b
+fromExp (Lan f (I x)) = \a -> f (a, x)
+instance Functor (FreeF f) where
+    fmap g (FMap h fi) = FMap (g . h) fi
+\end{lstlisting}
+
 {Haskell 代码示例11111}
 \begin{lstlisting}[language=Haskell]
 f :: A -> B
